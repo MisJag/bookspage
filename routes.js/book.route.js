@@ -6,8 +6,7 @@ let bookSchema = require('../models/book')
 
 // Create user
 bookRoutes.post('/add-book', (req, res, next) => {
- // console.log(req.body);//just for checking
- // console.log(res.body);//just for---------
+
   bookSchema.create(req.body, (error, data) => {
     if (error) {
       return next(error)

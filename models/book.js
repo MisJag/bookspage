@@ -4,9 +4,7 @@ let bookSchema = new Schema({
   name: {
     type: String
   },
-  pubdate: {
-    type: Date,
-  },
+  
   desc: {
     type: String
   },

@@ -12,5 +12,5 @@ let authorSchema = new Schema({
 }, {
     collection: 'authors'
   })
-
+  
 module.exports = mongoose.model('author',authorSchema)

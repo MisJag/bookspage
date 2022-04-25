@@ -2,6 +2,8 @@ let express = require('express')
 let mongoose = require('mongoose')
 let cors = require('cors')
 
+let author= require('./models/author')
+let book= require('./models/book')
 
 const createError = require('http-errors');
 
@@ -38,4 +40,26 @@ const port = process.env.PORT || 4000
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
-
+// ---------------------------------------------------//
+book.aggregate([
+  {
+    $lookup: {
+      from: "authors",
+      localField: "name",
+      foreignField: "name",
+      as: "book_info",
+    },
+  },
+  // Deconstructs the array field from the
+  // input document to output a document
+  // for each element
+  {
+    $unwind: "$book_info",
+  },
+])
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
