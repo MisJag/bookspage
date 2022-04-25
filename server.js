@@ -1,17 +1,20 @@
 let express = require('express')
 let mongoose = require('mongoose')
 let cors = require('cors')
-let bodyParser = require('body-parser')
-//let dbConfig = require('./database/db')
+
+
 const createError = require('http-errors');
 
 // Express Route
-//const userRoute = require("./routes/user.route");
-//const blogRoute = require("./routes/blog.route")
+const authorRoute = require("./routes.js/author.route");
+
+const bookRoute = require("./routes.js/book.route");
+
+
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/bookdb');//connect mongodb collection users
+mongoose.connect('mongodb://localhost:27017/bookdata');
 
 var db = mongoose.connection;
 
@@ -20,14 +23,15 @@ db.once("open", () => { console.log("COnnected succesfully")});
 
 const app = express()
 app.use(express.json());
-app.use(express.urlencoded());
-//app.use(bodyParser.json())
+
+
 
 app.use(cors())
 app.options('*', cors());
-//app.use('/users', userRoute);
-//app.use('/blogs', blogRoute);
-//app.listen(3000)
+app.use('/authors', authorRoute);
+app.use('/books', bookRoute);
+
+
 
 // PORT
 const port = process.env.PORT || 4000
