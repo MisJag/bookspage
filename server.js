@@ -45,6 +45,7 @@ book.aggregate([
   {
     $lookup: {
       from: "authors",
+      
       localField: "name",
       foreignField: "name",
       as: "book_info",
@@ -54,9 +55,10 @@ book.aggregate([
   // input document to output a document
   // for each element
   {
-    $unwind: "$book_info",
-  },
-])
+    $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$book_info", 0 ] }, "$$ROOT" ] } }
+ },
+ { $project: { book_info: 0 } }
+] )
   .then((result) => {
     console.log(result);
   })

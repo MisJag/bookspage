@@ -8,9 +8,7 @@ let bookSchema = new Schema({
   desc: {
     type: String
   },
-  author: {
-    type: String
-  },
+  
   
 }, {
     collection: 'books'
