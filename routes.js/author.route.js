@@ -28,4 +28,15 @@ authorRoutes.route('/show-authors').get((req, res) => {
       }
     })
   })
+  authorRoutes.route('/delete-author/:id').delete((req, res, next) => {
+    authorSchema.findByIdAndRemove(req.params.id, (error, data) => {
+      if (error) {
+        return next(error)
+      } else {
+        res.status(200).json({
+          msg: data,
+        })
+      }
+    })
+  })
 module.exports = authorRoutes;

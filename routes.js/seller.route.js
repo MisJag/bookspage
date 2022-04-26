@@ -1,13 +1,13 @@
 const express = require('express');
 let mongoose = require('mongoose');
-const  bookRoutes = express.Router(); 
+const  sellerRoutes = express.Router(); 
 // user Model
-let bookSchema = require('../models/book')
+let sellerSchema = require('../models/seller')
 
 // Create user
-bookRoutes.post('/add-book', (req, res, next) => {
+sellerRoutes.post('/add-seller', (req, res, next) => {
 
-  bookSchema.create(req.body, (error, data) => {
+  sellerSchema.create(req.body, (error, data) => {
     if (error) {
       return next(error)
     } else {
@@ -17,8 +17,8 @@ bookRoutes.post('/add-book', (req, res, next) => {
     }
   })
 })
-bookRoutes.route('/show-books').get((req, res) => {
-    bookSchema.find((error, data) => {
+sellerRoutes.route('/show-sellers').get((req, res) => {
+    sellerSchema.find((error, data) => {
       if (error) {
         return next(error)
       } else {
@@ -28,8 +28,8 @@ bookRoutes.route('/show-books').get((req, res) => {
       }
     })
   })
-  bookRoutes.route('/delete-book/:id').delete((req, res, next) => {
-    bookSchema.findByIdAndRemove(req.params.id, (error, data) => {
+  sellerRoutes.route('/delete-seller/:id').delete((req, res, next) => {
+    sellerSchema.findByIdAndRemove(req.params.id, (error, data) => {
       if (error) {
         return next(error)
       } else {
@@ -39,4 +39,4 @@ bookRoutes.route('/show-books').get((req, res) => {
       }
     })
   })
-module.exports = bookRoutes;
+module.exports = sellerRoutes;

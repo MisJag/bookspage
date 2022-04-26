@@ -1,16 +1,16 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-let authorSchema = new Schema({
+let sellerSchema = new Schema({
   book_id: {
     type: String
   },
   
-  author: {
+  seller: {
     type: String
   },
   
 }, {
-    collection: 'authors'
+    collection: 'sellers'
   })
   
-module.exports = mongoose.model('author',authorSchema)
+module.exports = mongoose.model('seller',sellerSchema)
