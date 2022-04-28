@@ -2,7 +2,6 @@ let express = require('express')
 let mongoose = require('mongoose')
 let cors = require('cors')
 const Schema = mongoose.Schema;
-let author= require('./models/author')
 let book= require('./models/book')
 
 
@@ -86,41 +85,7 @@ const server = app.listen(port, () => {
   //------------------------------------------without match stage----------------------------------------------------------//
 
 
- const enquired_book= "book1";
- book.aggregate([
-  {  
-   $lookup: {
-      from: "authors",
-      localField: "book_id",
-      foreignField: "book_id",
-      as: "author_info",
-    },
-  },
-  {
-    $lookup: {
-      from: "sellers",
-      localField: "book_id",
-      foreignField: "book_id",
-      as: "seller_info",
-    },
-  },
-  
-  {
-    $unwind: "$author_info",
-  },
-  {
-    $unwind: "$seller_info",
-  },
-  
-])
-  .then((result) => {
-    var matchbook = new MatchBook(result);
-    matchbook.save(result) 
-    console.log(result);
-  })
-  .catch((error) => {
-    console.log(error);
-});
+ 
   
 
   
